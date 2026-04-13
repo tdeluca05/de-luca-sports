@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Luca Sport</title>
+  <meta
+    name="description"
+    content="De Luca Sport: zapatillas y articulos deportivos con atencion personalizada y stock real en Villa Bosch. Reebook, Olympikus, Topper y Atomik."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="header" id="top">
+      <div class="header-inner">
+        <a href="#inicio" class="logo">
+          <img src="img/r.png" alt="De Luca Sport" />
+          <div class="logo-copy">
+            <strong>De Luca Sport</strong>
+            <span>Villa Bosch</span>
+          </div>
+        </a>
+
+        <nav class="nav" id="main-nav" aria-label="Principal">
+          <a href="#inicio" class="active">Inicio</a>
+          <a href="#productos">Catalogo</a>
+          <a href="#newsletter">Novedades</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-pill" href="https://instagram.com/delucasportok" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+          <a class="header-pill" href="https://wa.me/5491165699188" target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
+          <button class="cart-button" id="cart-btn" aria-label="Abrir carrito">
+            <span>Carrito</span>
+            <span class="cart-counter hidden" id="cart-count">0</span>
+          </button>
+          <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <div class="hero-inner hero-inner-simple">
+          <div class="hero-copy hero-copy-simple animate-on-scroll reveal-up is-visible">
+            <h1>
+              <span class="hero-word">Cada</span>
+              <span class="hero-word">paso</span>
+              <span class="hero-word">suma.</span>
+              <span class="hero-word">Corre</span>
+              <span class="hero-word">con</span>
+              <span class="hero-word">actitud,</span>
+              <span class="hero-word">entrena</span>
+              <span class="hero-word">con</span>
+              <span class="hero-word">estilo.</span>
+            </h1>
+            <p>
+              Una tienda con energia deportiva, modelos seleccionados y una estetica directa: producto,
+              actitud y accion.
+            </p>
+            <div class="hero-actions">
+              <a href="#productos" class="btn btn-primary">Ver catalogo</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="products-section" id="productos">
+        <div class="section-heading products-heading">
+          <div>
+            <span class="eyebrow eyebrow-dark">Catalogo</span>
+            <h2>Modelos listos para consultar y vender.</h2>
+          </div>
+          <p>
+            Filtra por marca, revisa imagenes del producto y elegi talle antes de agregar al carrito.
+          </p>
+        </div>
+
+        <div class="toolbar">
+          <div class="filters" role="tablist" aria-label="Filtrar productos">
+            <button class="filter-chip active" data-filter="all" type="button">Todos</button>
+            <button class="filter-chip" data-filter="reebook" type="button">Reebook</button>
+            <button class="filter-chip" data-filter="olympikus" type="button">Olympikus</button>
+            <button class="filter-chip" data-filter="topper" type="button">Topper</button>
+            <button class="filter-chip" data-filter="atomik" type="button">Atomik</button>
+          </div>
+          <div class="catalog-controls">
+            <label class="catalog-sort">
+              <select id="product-sport" aria-label="Filtrar por deporte">
+                <option value="all">Todos los deportes</option>
+                <option value="running">Running</option>
+                <option value="futbol">Futbol</option>
+                <option value="tenis">Tenis</option>
+                <option value="training">Training</option>
+                <option value="accesorios">Accesorios</option>
+              </select>
+            </label>
+            <label class="catalog-search">
+              <input
+                type="search"
+                id="product-search"
+                placeholder="Buscar modelo o marca"
+                aria-label="Buscar productos"
+              />
+            </label>
+            <label class="catalog-sort">
+              <select id="product-sort" aria-label="Ordenar productos">
+                <option value="default">Ordenar</option>
+                <option value="price-asc">Menor precio</option>
+                <option value="price-desc">Mayor precio</option>
+                <option value="name-asc">A-Z</option>
+              </select>
+            </label>
+          </div>
+          <p class="catalog-note" id="results-count">Mostrando 6 productos</p>
+        </div>
+
+        <div class="products-carousel">
+          <button class="products-nav prev" id="products-prev" type="button" aria-label="Ver productos anteriores">
+            &#8249;
+          </button>
+          <div class="products-viewport">
+            <div class="products-grid" id="products-grid">
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="1" data-brand="reebook" data-sport="running" data-search="reebook energen run running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto1,1.jpeg" alt="Reebook Energen Run 3 vista lateral" class="active" />
+              <img src="img/producto1,2.jpeg" alt="Reebook Energen Run 3 vista superior" />
+              <img src="img/producto1,3.jpeg" alt="Reebook Energen Run 3 detalle de suela" />
+              <button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+              <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+              <div class="gallery-dots">
+                <button class="gallery-dot active" type="button" aria-label="Ir a imagen 1"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 2"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 3"></button>
+              </div>
+              <span class="product-badge">Running</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Reebook</span>
+                <span class="product-tag">Amortiguacion diaria</span>
+              </div>
+              <h3 class="product-name">Energen Run 3</h3>
+              <p class="product-description">Modelo comodo para uso diario, caminatas activas y entrenamiento suave.</p>
+              <div class="product-price">$80.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="38.5">38.5</button>
+                  <button class="size-btn" type="button" data-size="39.5">39.5</button>
+                  <button class="size-btn" type="button" data-size="40">40</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                  <button class="size-btn" type="button" data-size="41.5">41.5</button>
+                  <button class="size-btn" type="button" data-size="42">42</button>
+                  <button class="size-btn" type="button" data-size="43">43</button>
+                  <button class="size-btn" type="button" data-size="45">45</button>
+                  <button class="size-btn" type="button" data-size="45.5">45.5</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="1" data-name="Reebook Energen Run 3" data-price="80000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="2" data-brand="reebook" data-sport="running" data-search="reebook energen lite jp running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto2,1.jpeg" alt="Reebook Energen Lite JP vista lateral" class="active" />
+              <img src="img/producto2,2.jpeg" alt="Reebook Energen Lite JP vista superior" />
+              <button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+              <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+              <div class="gallery-dots">
+                <button class="gallery-dot active" type="button" aria-label="Ir a imagen 1"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 2"></button>
+              </div>
+              <span class="product-badge">Running</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Reebook</span>
+                <span class="product-tag">Liviana</span>
+              </div>
+              <h3 class="product-name">Energen Lite JP</h3>
+              <p class="product-description">Una opcion agil y versatil para quienes buscan comodidad sin exceso de peso.</p>
+              <div class="product-price">$65.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="35">35</button>
+                  <button class="size-btn" type="button" data-size="36">36</button>
+                  <button class="size-btn" type="button" data-size="37">37</button>
+                  <button class="size-btn" type="button" data-size="39">39</button>
+                  <button class="size-btn" type="button" data-size="40">40</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                  <button class="size-btn" type="button" data-size="42">42</button>
+                  <button class="size-btn" type="button" data-size="43">43</button>
+                  <button class="size-btn" type="button" data-size="44">44</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="2" data-name="Reebook Energen Lite JP" data-price="65000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="3" data-brand="olympikus" data-sport="running" data-search="olympikus plaza running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto3,1.jpeg" alt="Olympikus Plaza Running vista lateral" class="active" />
+              <img src="img/producto3,2.jpeg" alt="Olympikus Plaza Running detalle lateral" />
+              <button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+              <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+              <div class="gallery-dots">
+                <button class="gallery-dot active" type="button" aria-label="Ir a imagen 1"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 2"></button>
+              </div>
+              <span class="product-badge">Respuesta suave</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Olympikus</span>
+                <span class="product-tag">Uso diario</span>
+              </div>
+              <h3 class="product-name">Plaza Running</h3>
+              <p class="product-description">Diseno noble y estable para quienes priorizan comodidad y apoyo parejo.</p>
+              <div class="product-price">$80.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="36">36</button>
+                  <button class="size-btn" type="button" data-size="37">37</button>
+                  <button class="size-btn" type="button" data-size="38">38</button>
+                  <button class="size-btn" type="button" data-size="39">39</button>
+                  <button class="size-btn" type="button" data-size="40">40</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="3" data-name="Olympikus Plaza Running" data-price="80000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="4" data-brand="topper" data-sport="running" data-search="topper wind 5 running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto4,1.jpeg" alt="Topper Wind 5 Running vista lateral" class="active" />
+              <img src="img/producto4,2.jpeg" alt="Topper Wind 5 Running vista superior" />
+              <img src="img/producto4,3.jpeg" alt="Topper Wind 5 Running detalle de suela" />
+              <button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+              <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+              <div class="gallery-dots">
+                <button class="gallery-dot active" type="button" aria-label="Ir a imagen 1"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 2"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 3"></button>
+              </div>
+              <span class="product-badge">Precio fuerte</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Topper</span>
+                <span class="product-tag">Rendimiento urbano</span>
+              </div>
+              <h3 class="product-name">Wind 5 Running</h3>
+              <p class="product-description">Una silueta deportiva, firme y rendidora para ritmo cotidiano.</p>
+              <div class="product-price">$79.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="38">38</button>
+                  <button class="size-btn" type="button" data-size="39">39</button>
+                  <button class="size-btn" type="button" data-size="40">40</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                  <button class="size-btn" type="button" data-size="42">42</button>
+                  <button class="size-btn" type="button" data-size="43">43</button>
+                  <button class="size-btn" type="button" data-size="44">44</button>
+                  <button class="size-btn" type="button" data-size="45">45</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="4" data-name="Topper Wind 5 Running" data-price="79000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="5" data-brand="topper" data-sport="running" data-search="topper suva running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto5,1.jpeg" alt="Topper Suva vista lateral" class="active" />
+              <span class="product-badge">Entrada ideal</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Topper</span>
+                <span class="product-tag">Precio accesible</span>
+              </div>
+              <h3 class="product-name">Suva</h3>
+              <p class="product-description">Excelente opcion para arrancar con un modelo funcional y rendidor.</p>
+              <div class="product-price">$60.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="37">37</button>
+                  <button class="size-btn" type="button" data-size="38">38</button>
+                  <button class="size-btn" type="button" data-size="39">39</button>
+                  <button class="size-btn" type="button" data-size="40">40</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                  <button class="size-btn" type="button" data-size="42">42</button>
+                  <button class="size-btn" type="button" data-size="43">43</button>
+                  <button class="size-btn" type="button" data-size="44">44</button>
+                  <button class="size-btn" type="button" data-size="45">45</button>
+                  <button class="size-btn" type="button" data-size="46">46</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="5" data-name="Topper Suva" data-price="60000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card animate-on-scroll reveal-up" data-product-id="6" data-brand="atomik" data-sport="running" data-search="atomik fairfaxx running zapatillas deporte">
+            <div class="product-gallery">
+              <img src="img/producto6,1.jpeg" alt="Atomik Fairfaxx vista lateral" class="active" />
+              <img src="img/producto6,2.jpeg" alt="Atomik Fairfaxx vista superior" />
+              <img src="img/producto6,3.jpeg" alt="Atomik Fairfaxx detalle de suela" />
+              <img src="img/producto6,4.jpeg" alt="Atomik Fairfaxx perfil completo" />
+              <button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+              <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+              <div class="gallery-dots">
+                <button class="gallery-dot active" type="button" aria-label="Ir a imagen 1"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 2"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 3"></button>
+                <button class="gallery-dot" type="button" aria-label="Ir a imagen 4"></button>
+              </div>
+              <span class="product-badge">Ultimas unidades</span>
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="product-brand">Atomik</span>
+                <span class="product-tag">Stock limitado</span>
+              </div>
+              <h3 class="product-name">Fairfaxx</h3>
+              <p class="product-description">Modelo liviano con pocas unidades disponibles en cada talle.</p>
+              <div class="product-price">$65.000</div>
+              <div>
+                <div class="sizes-label">Talles disponibles (1 unidad c/u)</div>
+                <div class="sizes-grid">
+                  <button class="size-btn" type="button" data-size="35">35</button>
+                  <button class="size-btn" type="button" data-size="36">36</button>
+                  <button class="size-btn" type="button" data-size="39">39</button>
+                  <button class="size-btn" type="button" data-size="41">41</button>
+                  <button class="size-btn" type="button" data-size="42">42</button>
+                  <button class="size-btn" type="button" data-size="43">43</button>
+                  <button class="size-btn" type="button" data-size="44">44</button>
+                  <button class="size-btn" type="button" data-size="45">45</button>
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="6" data-name="Atomik Fairfaxx" data-price="65000">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </article>
+            </div>
+          </div>
+          <button class="products-nav next" id="products-next" type="button" aria-label="Ver mas productos">
+            &#8250;
+          </button>
+        </div>
+      </section>
+
+      <section class="newsletter-section animate-on-scroll reveal-up" id="newsletter">
+        <div class="newsletter-shell">
+          <div class="newsletter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 6h18v12H3z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <span class="eyebrow eyebrow-dark">Newsletter</span>
+          <h2>Recibi novedades, ingresos y modelos destacados sobre De Luca Sport.</h2>
+          <p>Dejanos tu mail para enterarte primero de nuevos pares, reposiciones y oportunidades del local.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Ingresa tu email" aria-label="Ingresa tu email" />
+            <button type="submit" aria-label="Suscribirme">Suscribirme</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contacto">
+        <div class="contact-layout">
+          <div class="contact-copy">
+            <span class="eyebrow eyebrow-light">Contacto</span>
+            <h2>Visitanos, escribinos y segui vendiendo desde una sola pagina.</h2>
+            <p>
+              El sitio quedo armado para mostrar marca, productos, proceso de compra y datos del local sin
+              sobrecargar al usuario.
+            </p>
+            <div class="contact-actions">
+              <a href="https://wa.me/5491165699188" target="_blank" rel="noreferrer" class="btn btn-whatsapp">
+                Hablar por WhatsApp
+              </a>
+              <a href="https://instagram.com/delucasportok" target="_blank" rel="noreferrer" class="btn btn-secondary light">
+                Ver Instagram
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-grid">
+            <article class="contact-card">
+              <span class="contact-label">Direccion</span>
+              <h3>Santos Vega 5770</h3>
+              <p>Villa Bosch, Buenos Aires</p>
+            </article>
+            <article class="contact-card">
+              <span class="contact-label">Horarios</span>
+              <h3>Lunes a Sabado</h3>
+              <p>9:30 a 13:00 hs<br />16:30 a 20:00 hs</p>
+            </article>
+            <article class="contact-card">
+              <span class="contact-label">WhatsApp</span>
+              <h3>+54 9 11 6569-9188</h3>
+              <p>Consultas, reserva y coordinacion</p>
+            </article>
+            <article class="contact-card">
+              <span class="contact-label">Instagram</span>
+              <h3>@delucasportok</h3>
+              <p>Novedades, ingresos y contacto rapido</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong>De Luca Sport</strong>
+          <p>Catalogo digital de zapatillas running con foco en claridad, confianza y accion.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#productos">Catalogo</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <p class="footer-copy">2026 | Villa Bosch | Sitio listo para venta directa por WhatsApp</p>
+      </div>
+    </footer>
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Carrito">
+    <div class="cart-header-panel">
+      <div>
+        <span class="cart-kicker">Pedido</span>
+        <h2>Tu carrito</h2>
+      </div>
+      <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">&#x00D7;</button>
+    </div>
+
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty" id="cart-empty">
+        <strong>No agregaste productos todavia.</strong>
+        <p>Selecciona un talle y suma pares para preparar el mensaje de compra.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong id="cart-subtotal">$0</strong>
+      </div>
+      <button class="btn btn-secondary btn-checkout hidden" id="clear-cart-btn" type="button">
+        Vaciar carrito
+      </button>
+      <button class="btn btn-primary btn-checkout" id="start-checkout-btn" type="button">
+        Proceder con la compra
+      </button>
+      <form class="checkout-form hidden" id="checkout-form">
+        <button class="btn btn-secondary btn-back-cart" id="back-to-cart-btn" type="button">
+          Volver al carrito
+        </button>
+        <div class="checkout-grid">
+          <input type="text" id="checkout-name" placeholder="Nombre y apellido" required />
+          <input type="email" id="checkout-email" placeholder="Email" required />
+          <input type="tel" id="checkout-phone" placeholder="Telefono" required />
+          <select id="checkout-delivery" required>
+            <option value="">Entrega</option>
+            <option value="retiro">Retiro en el local</option>
+            <option value="envio">Envio a domicilio</option>
+          </select>
+          <select id="checkout-payment" required>
+            <option value="">Pago</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="transferencia">Transferencia</option>
+            <option value="efectivo_local">Efectivo en el local</option>
+          </select>
+          <div class="payment-details hidden" id="payment-details">
+            <div class="payment-panel hidden" id="payment-card-fields">
+              <input type="text" id="checkout-card-name" placeholder="Nombre como figura en la tarjeta" />
+              <input type="text" id="checkout-card-number" inputmode="numeric" placeholder="Numero de tarjeta" />
+              <div class="payment-split">
+                <input type="text" id="checkout-card-expiry" placeholder="Vencimiento MM/AA" />
+                <input type="text" id="checkout-card-cvv" inputmode="numeric" placeholder="CVV" />
+              </div>
+            </div>
+
+            <div class="payment-panel payment-info hidden" id="payment-transfer-fields">
+              <strong>Transferencia bancaria</strong>
+              <p>Alias: deluca.sport</p>
+              <p>CBU: 0000003100000000000001</p>
+              <p>Despues de transferir, deja una referencia para identificar el pago.</p>
+              <input type="text" id="checkout-transfer-reference" placeholder="Numero de operacion o referencia" />
+            </div>
+
+            <div class="payment-panel payment-info hidden" id="payment-cash-fields">
+              <strong>Efectivo en el local</strong>
+              <p>Pagas al momento de retirar tu pedido en De Luca Sport.</p>
+            </div>
+          </div>
+          <input type="text" id="checkout-address" placeholder="Direccion de entrega (si corresponde)" />
+        </div>
+        <button class="btn btn-primary btn-checkout" id="checkout-submit" type="submit">
+          Finalizar compra
+        </button>
+      </form>
+      <div class="checkout-success hidden" id="checkout-success">
+        <strong>Pedido enviado.</strong>
+        <p>Se abrio WhatsApp con tu pedido listo para enviar. Si no se abrio automaticamente, escribinos al +54 9 11 6569-9188.</p>
+      </div>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="script.js?v=20260326-2"></script>
+</body>
+</html>
