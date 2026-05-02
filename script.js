@@ -496,6 +496,18 @@ function initNavigation() {
   const navLinks = nav ? [...nav.querySelectorAll("a")] : [];
   const sections = [...document.querySelectorAll("main section[id]")];
 
+  // Link activo según la página actual
+  const filename = window.location.pathname.split("/").pop() || "index.html";
+  if (filename === "catalogo.html") {
+    navLinks.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === "catalogo.html");
+    });
+  } else {
+    navLinks.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === "#inicio");
+    });
+  }
+
   hamburger?.addEventListener("click", () => {
     const open = nav?.classList.toggle("open");
     hamburger.setAttribute("aria-expanded", String(Boolean(open)));
@@ -520,20 +532,25 @@ function initNavigation() {
     }
   });
 
-  window.addEventListener("scroll", () => {
-    const threshold = window.scrollY + 140;
-    let currentId = sections[0]?.id || "inicio";
+  // Scroll activo solo en páginas con navegación por secciones (#hash)
+  const hasHashNav = navLinks.some(l => (l.getAttribute("href") || "").startsWith("#"));
+  if (hasHashNav) {
+    window.addEventListener("scroll", () => {
+      const threshold = window.scrollY + 140;
+      let currentId = sections[0]?.id || "inicio";
 
-    sections.forEach((section) => {
-      if (threshold >= section.offsetTop) {
-        currentId = section.id;
+      sections.forEach((section) => {
+        if (threshold >= section.offsetTop) {
+          currentId = section.id;
+        }
+      });
+
+      const matchingLink = navLinks.find(link => link.getAttribute("href") === `#${currentId}`);
+      if (matchingLink) {
+        navLinks.forEach(link => link.classList.toggle("active", link === matchingLink));
       }
     });
-
-    navLinks.forEach((link) => {
-      link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
-    });
-  });
+  }
 }
 
 function initAddToCartButtons() {
@@ -776,18 +793,111 @@ function initScrollReveal() {
   });
 }
 
+function initNewsletter() {
+  const form = document.querySelector(".newsletter-form");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = form.querySelector("input[type='email']");
+    if (!input || !input.value.trim()) return;
+    input.value = "";
+    showToast("Gracias por suscribirte. Te avisamos con las novedades.");
+  });
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function renderProductCard(product) {
+  const article = document.createElement("article");
+  article.className = "product-card animate-on-scroll reveal-up";
+  article.dataset.productId = String(product.id);
+  article.dataset.brand = product.marca;
+  article.dataset.sport = product.deporte;
+  article.dataset.search = `${product.marca} ${product.nombre} ${product.deporte} zapatillas deporte`;
+
+  const imagesHTML = product.imagenes
+    .map((src, i) => `<img src="${src}" alt="${capitalize(product.marca)} ${product.nombre} vista ${i + 1}"${i === 0 ? ' class="active"' : ""} />`)
+    .join("\n      ");
+
+  const galleryNavHTML = product.imagenes.length > 1
+    ? `<button class="gallery-btn prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+      <button class="gallery-btn next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+      <div class="gallery-dots">
+        ${product.imagenes.map((_, i) => `<button class="gallery-dot${i === 0 ? " active" : ""}" type="button" aria-label="Ir a imagen ${i + 1}"></button>`).join("\n        ")}
+      </div>`
+    : "";
+
+  const sizesLabel = `Talles disponibles${product.tallesNota ? ` ${product.tallesNota}` : ""}`;
+  const sizesHTML = product.talles
+    .map(t => `<button class="size-btn" type="button" data-size="${t}">${t}</button>`)
+    .join("\n          ");
+
+  const fullName = `${capitalize(product.marca)} ${product.nombre}`;
+
+  article.innerHTML = `
+    <div class="product-gallery">
+      ${imagesHTML}
+      ${galleryNavHTML}
+      <span class="product-badge">${product.badge}</span>
+    </div>
+    <div class="product-info">
+      <div class="product-meta">
+        <span class="product-brand">${capitalize(product.marca)}</span>
+        <span class="product-tag">${product.tag}</span>
+      </div>
+      <h3 class="product-name">${product.nombre}</h3>
+      <p class="product-description">${product.descripcion}</p>
+      <div class="product-price">${formatPrice(product.precio)}</div>
+      <div>
+        <div class="sizes-label">${sizesLabel}</div>
+        <div class="sizes-grid">
+          ${sizesHTML}
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="btn btn-primary btn-add-cart" type="button" data-action="add-to-cart" data-product-id="${product.id}" data-name="${fullName}" data-price="${product.precio}">
+          Agregar al carrito
+        </button>
+      </div>
+    </div>
+  `;
+
+  return article;
+}
+
+function renderCatalog() {
+  const grid = document.getElementById("products-grid");
+  if (!grid) return;
+  PRODUCTOS.forEach(p => grid.appendChild(renderProductCard(p)));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadCart();
-  initProductOrder();
-  initGalleries();
-  initSizeSelectors();
-  initFilters();
-  initProductCarousel();
   initNavigation();
-  initAddToCartButtons();
   initCartControls();
+  initNewsletter();
+
+  const esCatalogo = !!document.getElementById("products-grid");
+  if (esCatalogo) {
+    renderCatalog();
+    initProductOrder();
+    initGalleries();
+    initSizeSelectors();
+    initFilters();
+    initProductCarousel();
+    initAddToCartButtons();
+    updateResultsCount();
+  } else {
+    initGalleries();
+    initSizeSelectors();
+    initAddToCartButtons();
+  }
+
   initScrollReveal();
+
   renderCart();
   updateCartCounter();
-  updateResultsCount();
 });
