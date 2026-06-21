@@ -177,6 +177,34 @@ button {
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* Bandera de Italia: verde - blanco - rojo */
+.pill-whatsapp {
+  background: #1ebe57;
+  border-color: #1ebe57;
+  color: #fff;
+}
+.pill-whatsapp:hover {
+  background: #1da851;
+  border-color: #1da851;
+}
+.pill-instagram {
+  background: #ffffff;
+  border-color: rgba(29, 31, 30, 0.18);
+  color: var(--text);
+}
+.pill-instagram:hover {
+  background: #ffffff;
+}
+.pill-carrito {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.pill-carrito:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
 .btn {
   border: none;
   border-radius: 999px;

@@ -47,22 +47,22 @@ export default function Header() {
 
         <div className="header-actions">
           <a
-            className="header-pill"
-            href="https://instagram.com/delucasportok"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Instagram
-          </a>
-          <a
-            className="header-pill"
+            className="header-pill pill-whatsapp"
             href="https://wa.me/5491165699188"
             target="_blank"
             rel="noreferrer"
           >
             WhatsApp
           </a>
-          <button className="cart-button" onClick={openCart} aria-label="Abrir carrito">
+          <a
+            className="header-pill pill-instagram"
+            href="https://instagram.com/delucasportok"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram
+          </a>
+          <button className="cart-button pill-carrito" onClick={openCart} aria-label="Abrir carrito">
             <span>Carrito</span>
             {count > 0 && <span className="cart-counter">{count}</span>}
           </button>
