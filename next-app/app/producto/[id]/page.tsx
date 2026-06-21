@@ -2,6 +2,9 @@
 
 import { useState, use } from "react";
 import { notFound, useRouter } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CartPanel from "@/components/CartPanel";
 import { useCart } from "@/components/CartContext";
 import { PRODUCTOS } from "@/lib/productos";
 
@@ -62,7 +65,10 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
   const sizesLabel = `Seleccionar Talle${found.tallesNota ? ` ${found.tallesNota}` : ""}`;
 
   return (
-    <div className="detalle-shell">
+    <>
+      <Header />
+
+      <div className="detalle-shell">
       <button className="detalle-back" onClick={() => router.back()} type="button">
         ← Volver
       </button>
@@ -156,6 +162,10 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
           </div>
         </div>
       </div>
-    </div>
+      </div>
+
+      <Footer />
+      <CartPanel />
+    </>
   );
 }
