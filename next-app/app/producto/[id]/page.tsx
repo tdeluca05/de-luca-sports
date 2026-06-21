@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import { notFound, useRouter } from "next/navigation";
 import { useCart } from "@/components/CartContext";
 import { PRODUCTOS } from "@/lib/productos";
 
-export default function ProductoPage({ params }: { params: { id: string } }) {
+export default function ProductoPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const { addItem } = useCart();
-  const found = PRODUCTOS.find((p) => p.id === Number(params.id));
+  const found = PRODUCTOS.find((p) => p.id === Number(id));
 
   const [mainImage, setMainImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
