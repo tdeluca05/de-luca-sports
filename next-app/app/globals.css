@@ -1599,16 +1599,11 @@ button {
   grid-auto-columns: calc((100% - 48px) / 3);
   gap: 24px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   scrollbar-width: none;
   padding: 4px 2px 12px;
 }
 .featured-track::-webkit-scrollbar {
   display: none;
-}
-.featured-track .product-card {
-  scroll-snap-align: start;
 }
 .featured-carousel .products-nav.prev {
   left: 0;
