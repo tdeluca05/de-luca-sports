@@ -77,7 +77,7 @@ export default function HomePage() {
           <div className="contact-layout">
             <div className="contact-copy">
               <span className="eyebrow eyebrow-light">Contacto</span>
-              <h2>Visitanos, escribinos y segui vendiendo desde una sola pagina.</h2>
+              <h2>Estamos para ayudarte. Escribinos por WhatsApp o visitanos en Villa Bosch.</h2>
               <div className="contact-actions">
                 <a
                   href="https://wa.me/5491165699188"
