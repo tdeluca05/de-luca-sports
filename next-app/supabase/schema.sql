@@ -37,12 +37,18 @@ CREATE TABLE IF NOT EXISTS ordenes (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Tabla de suscriptores al newsletter
+-- Tabla de suscriptores al newsletter (con confirmación por email)
 CREATE TABLE IF NOT EXISTS suscriptores (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email       TEXT NOT NULL UNIQUE,
+  confirmado  BOOLEAN NOT NULL DEFAULT FALSE,  -- true cuando hace click en el mail
+  token       TEXT,                            -- token del link de confirmación
   created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Si la tabla ya existía sin estas columnas, las agrega:
+ALTER TABLE suscriptores ADD COLUMN IF NOT EXISTS confirmado BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE suscriptores ADD COLUMN IF NOT EXISTS token TEXT;
 
 -- Índices útiles
 CREATE INDEX IF NOT EXISTS idx_productos_marca    ON productos(marca);

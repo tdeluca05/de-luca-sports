@@ -23,9 +23,9 @@ export default function NewsletterForm() {
         const data = await res.json().catch(() => ({}));
         setEstado("ok");
         setMensaje(
-          data.duplicado
-            ? "Este email ya está suscripto."
-            : "¡Listo! Te vamos a avisar con las novedades."
+          data.yaConfirmado
+            ? "Este email ya está suscripto y confirmado."
+            : "¡Casi listo! Te mandamos un mail para confirmar tu suscripción."
         );
         setEmail("");
       } else {
