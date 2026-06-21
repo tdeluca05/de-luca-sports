@@ -11,6 +11,15 @@ type FilterBrand = "all" | "reebook" | "olympikus" | "topper" | "atomik";
 type FilterDeporte = "all" | "running" | "futbol" | "tenis" | "training" | "accesorios";
 type SortOrder = "default" | "price-asc" | "price-desc" | "name-asc";
 
+// Pasa a minúsculas y saca tildes para que la búsqueda sea tolerante
+// ("córrida" coincide con "corrida", "REEBOK" con "reebok").
+function normalizar(texto: string): string {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
+}
+
 export default function CatalogoPage() {
   const [brand, setBrand] = useState<FilterBrand>("all");
   const [deporte, setDeporte] = useState<FilterDeporte>("all");
@@ -23,13 +32,14 @@ export default function CatalogoPage() {
     if (brand !== "all") result = result.filter((p) => p.marca === brand);
     if (deporte !== "all") result = result.filter((p) => p.deporte === deporte);
     if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.nombre.toLowerCase().includes(q) ||
-          p.marca.toLowerCase().includes(q) ||
-          p.deporte.toLowerCase().includes(q)
-      );
+      // Separa la búsqueda en palabras (ignora espacios de más)
+      const terms = normalizar(search).split(/\s+/).filter(Boolean);
+      result = result.filter((p) => {
+        // Junta todos los campos donde buscar, normalizados (sin tildes)
+        const texto = normalizar(`${p.nombre} ${p.marca} ${p.deporte} ${p.tag}`);
+        // El producto coincide si contiene TODAS las palabras buscadas
+        return terms.every((t) => texto.includes(t));
+      });
     }
 
     if (sort === "price-asc") result = [...result].sort((a, b) => a.precio - b.precio);
