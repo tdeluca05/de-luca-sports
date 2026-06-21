@@ -832,6 +832,10 @@ button {
   flex-direction: column;
   overflow: hidden;
   border-radius: 28px;
+  background: #ffffff;
+  backdrop-filter: none;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(16, 24, 20, 0.06);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
