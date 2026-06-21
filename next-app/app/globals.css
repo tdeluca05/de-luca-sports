@@ -177,6 +177,29 @@ button {
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* Ícono de carrito (header) */
+.cart-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  transition: transform var(--transition), border-color var(--transition), background-color var(--transition);
+}
+.cart-icon-btn svg {
+  width: 24px;
+  height: 24px;
+}
+.cart-icon-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(29, 31, 30, 0.28);
+}
+
 /* Círculo de Instagram (contacto) */
 .ig-circle {
   display: inline-flex;
