@@ -5,9 +5,15 @@ import { useCart } from "./CartContext";
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5491165699188";
 
+// Nombre: solo letras (con acentos), espacios, apóstrofes y guiones. Mínimo 2.
+const NOMBRE_REGEX = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]{2,}$/;
+// Email: formato válido (algo@algo.algo)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function CartPanel() {
   const { items, isOpen, total, closeCart, removeItem, changeQty, clearCart } = useCart();
   const [step, setStep] = useState<"cart" | "form" | "success">("cart");
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "", email: "", phone: "",
     delivery: "", payment: "", address: "",
@@ -17,10 +23,51 @@ export default function CartPanel() {
     return "$" + value.toLocaleString("es-AR");
   }
 
+  // Al cambiar la entrega, si elige envío y tenía "efectivo en el local"
+  // (que solo aplica a retiro), limpiamos el pago para que vuelva a elegir.
+  function handleDeliveryChange(value: string) {
+    setForm((f) => {
+      const next = { ...f, delivery: value };
+      if (value === "envio" && f.payment === "efectivo_local") {
+        next.payment = "";
+      }
+      return next;
+    });
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone || !form.delivery || !form.payment) return;
-    if (form.delivery === "envio" && !form.address) return;
+    setError("");
+
+    if (!NOMBRE_REGEX.test(form.name.trim())) {
+      setError("Ingresá un nombre y apellido válido (solo letras).");
+      return;
+    }
+    if (!EMAIL_REGEX.test(form.email.trim())) {
+      setError("Ingresá un email válido (ej: nombre@gmail.com).");
+      return;
+    }
+    if (form.phone.replace(/\D/g, "").length < 6) {
+      setError("Ingresá un teléfono válido.");
+      return;
+    }
+    if (!form.delivery) {
+      setError("Elegí una forma de entrega.");
+      return;
+    }
+    if (!form.payment) {
+      setError("Elegí una forma de pago.");
+      return;
+    }
+    if (form.delivery === "envio" && !form.address.trim()) {
+      setError("Ingresá la dirección de entrega.");
+      return;
+    }
+    // Coherencia: pagar en efectivo en el local solo si retira en el local
+    if (form.payment === "efectivo_local" && form.delivery !== "retiro") {
+      setError("El pago en efectivo en el local es solo para retiro.");
+      return;
+    }
 
     const lines = [
       "*Nuevo pedido — De Luca Sport*",
@@ -106,10 +153,27 @@ export default function CartPanel() {
         {step === "form" && (
           <form className="checkout-form" onSubmit={handleSubmit}>
             <div className="checkout-grid">
-              <input required placeholder="Nombre y apellido" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-              <input required type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-              <input required type="tel" placeholder="Telefono" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-              <select required value={form.delivery} onChange={(e) => setForm({ ...form, delivery: e.target.value })}>
+              <input
+                required
+                placeholder="Nombre y apellido"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value.replace(/[0-9]/g, "") })}
+              />
+              <input
+                required
+                type="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
+              <input
+                required
+                type="tel"
+                placeholder="Telefono"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/[^\d\s()+-]/g, "") })}
+              />
+              <select required value={form.delivery} onChange={(e) => handleDeliveryChange(e.target.value)}>
                 <option value="">Entrega</option>
                 <option value="retiro">Retiro en el local</option>
                 <option value="envio">Envio a domicilio</option>
@@ -118,13 +182,17 @@ export default function CartPanel() {
                 <option value="">Pago</option>
                 <option value="tarjeta">Tarjeta</option>
                 <option value="transferencia">Transferencia</option>
-                <option value="efectivo_local">Efectivo en el local</option>
+                {/* El efectivo en el local solo se ofrece si retira en el local */}
+                {form.delivery !== "envio" && (
+                  <option value="efectivo_local">Efectivo en el local</option>
+                )}
                 <option value="mercadopago">Mercado Pago</option>
               </select>
               {form.delivery === "envio" && (
                 <input placeholder="Direccion de entrega" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
               )}
             </div>
+            {error && <p className="checkout-error">{error}</p>}
             <button type="submit" className="btn btn-primary btn-checkout">
               Finalizar compra
             </button>
