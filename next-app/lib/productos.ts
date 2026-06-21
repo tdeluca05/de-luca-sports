@@ -17,6 +17,7 @@ export const PRODUCTOS: Producto[] = [
     imagenes: ["/img/producto1,1.jpeg", "/img/producto1,2.jpeg", "/img/producto1,3.jpeg"],
     talles: [38.5, 39.5, 40, 41, 41.5, 42, 43, 45, 45.5],
     tallesNota: "",
+    colores: [{ nombre: "Gris", hex: "#9CA3AF" }, { nombre: "Negro", hex: "#111111" }],
     activo: true,
   },
   {
@@ -31,6 +32,7 @@ export const PRODUCTOS: Producto[] = [
     imagenes: ["/img/producto2,1.jpeg", "/img/producto2,2.jpeg"],
     talles: [35, 36, 37, 39, 40, 41, 42, 43, 44],
     tallesNota: "",
+    colores: [{ nombre: "Blanco", hex: "#FFFFFF" }, { nombre: "Azul", hex: "#3B82F6" }],
     activo: true,
   },
   {
@@ -45,6 +47,7 @@ export const PRODUCTOS: Producto[] = [
     imagenes: ["/img/producto3,1.jpeg", "/img/producto3,2.jpeg"],
     talles: [36, 37, 38, 39, 40, 41],
     tallesNota: "",
+    colores: [{ nombre: "Azul marino", hex: "#1E3A5F" }, { nombre: "Verde", hex: "#10B981" }],
     activo: true,
   },
   {
@@ -59,6 +62,7 @@ export const PRODUCTOS: Producto[] = [
     imagenes: ["/img/producto4,1.jpeg", "/img/producto4,2.jpeg", "/img/producto4,3.jpeg"],
     talles: [38, 39, 40, 41, 42, 43, 44, 45],
     tallesNota: "",
+    colores: [{ nombre: "Negro", hex: "#111111" }, { nombre: "Blanco", hex: "#FFFFFF" }],
     activo: true,
   },
   {
@@ -73,6 +77,7 @@ export const PRODUCTOS: Producto[] = [
     imagenes: ["/img/producto5,1.jpeg"],
     talles: [37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
     tallesNota: "",
+    colores: [{ nombre: "Rojo", hex: "#EF4444" }, { nombre: "Negro", hex: "#111111" }],
     activo: true,
   },
   {
@@ -92,6 +97,7 @@ export const PRODUCTOS: Producto[] = [
     ],
     talles: [35, 36, 39, 41, 42, 43, 44, 45],
     tallesNota: "(1 unidad c/u)",
+    colores: [{ nombre: "Gris", hex: "#6B7280" }, { nombre: "Naranja", hex: "#F97316" }],
     activo: true,
   },
 ];

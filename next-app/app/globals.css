@@ -1529,3 +1529,146 @@ button {
     display: none;
   }
 }
+
+/* ── Color dots (card) ── */
+.product-colors {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── Página de detalle ── */
+.detalle-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.detalle-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+  padding: 0;
+  margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.detalle-back:hover { color: #111; }
+
+.detalle-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Galería */
+.detalle-gallery {
+  display: flex;
+  gap: 1rem;
+}
+.detalle-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.detalle-thumb {
+  width: 72px;
+  height: 72px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+  cursor: pointer;
+  padding: 0;
+}
+.detalle-thumb.active { border-color: #111; }
+.detalle-thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+.detalle-main-img {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detalle-main-img img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Info */
+.detalle-nombre {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0.5rem;
+  line-height: 1.2;
+}
+.detalle-precio {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--red, #e53e3e);
+  margin: 0.75rem 0;
+}
+.detalle-section {
+  margin-top: 1.5rem;
+}
+.detalle-section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #777;
+  margin-bottom: 0.75rem;
+}
+
+/* Color swatches */
+.detalle-colors {
+  display: flex;
+  gap: 0.6rem;
+}
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline 0.15s;
+}
+.color-swatch.active {
+  outline: 2px solid #111;
+}
+
+/* Talles detalle */
+.detalle-sizes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .detalle-layout {
+    grid-template-columns: 1fr;
+  }
+  .detalle-gallery {
+    flex-direction: column-reverse;
+  }
+  .detalle-thumbs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .detalle-thumb {
+    flex-shrink: 0;
+  }
+}

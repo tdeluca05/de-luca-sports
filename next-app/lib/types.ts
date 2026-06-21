@@ -14,6 +14,7 @@ export interface Producto {
   imagenes: string[];
   talles: number[];
   tallesNota: string;
+  colores?: Array<{ nombre: string; hex: string }>;
   activo?: boolean;
 }
 
