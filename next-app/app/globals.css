@@ -710,10 +710,14 @@ button {
 .products-heading {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: 24px;
   max-width: none;
   margin-bottom: 8px;
+}
+/* El botón "Ver catalogo completo" alineado con el título grande */
+.products-heading > a.btn {
+  margin-bottom: 6px;
 }
 
 .toolbar {
