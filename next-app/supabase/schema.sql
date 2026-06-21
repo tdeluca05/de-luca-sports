@@ -37,6 +37,13 @@ CREATE TABLE IF NOT EXISTS ordenes (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Tabla de suscriptores al newsletter
+CREATE TABLE IF NOT EXISTS suscriptores (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email       TEXT NOT NULL UNIQUE,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- Índices útiles
 CREATE INDEX IF NOT EXISTS idx_productos_marca    ON productos(marca);
 CREATE INDEX IF NOT EXISTS idx_productos_deporte  ON productos(deporte);
@@ -77,6 +84,10 @@ CREATE POLICY "Solo admin puede ver las ordenes"
 CREATE POLICY "Solo admin puede actualizar ordenes"
   ON ordenes FOR UPDATE
   USING (auth.role() = 'authenticated');
+
+-- Suscriptores: lista privada. Sin políticas públicas, solo accesible
+-- vía la API con la service role key (que ignora RLS).
+ALTER TABLE suscriptores ENABLE ROW LEVEL SECURITY;
 
 -- ============================================================
 -- DATOS INICIALES (opcional — podés cargarlos desde el admin)

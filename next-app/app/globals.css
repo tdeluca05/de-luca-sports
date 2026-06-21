@@ -624,6 +624,7 @@ button {
 }
 
 .newsletter-form {
+  position: relative;
   margin: 28px auto 0;
   max-width: 560px;
   padding: 8px;
@@ -633,6 +634,23 @@ button {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.08);
+}
+
+.newsletter-msg {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.newsletter-msg.ok {
+  color: #1da851;
+}
+.newsletter-msg.error {
+  color: var(--primary);
 }
 
 .newsletter-form input {
