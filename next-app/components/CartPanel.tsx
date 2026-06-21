@@ -30,7 +30,7 @@ export default function CartPanel() {
       `Email: ${form.email}`,
       "",
       "*Productos:*",
-      ...items.map((i) => `• ${i.name} — Talle ${i.size} x${i.qty}  (${formatPrice(i.price * i.qty)})`),
+      ...items.map((i) => `• ${i.name} — Talle ${i.size}${i.color ? ` — ${i.color}` : ""} x${i.qty}  (${formatPrice(i.price * i.qty)})`),
       "",
       `*Total: ${formatPrice(total)}*`,
       "",
@@ -78,7 +78,10 @@ export default function CartPanel() {
               <article key={item.cartId} className="cart-item">
                 <div className="cart-item-info">
                   <div className="cart-item-name">{item.name}</div>
-                  <div className="cart-item-size">Talle {item.size}</div>
+                  <div className="cart-item-size">
+                    Talle {item.size}
+                    {item.color ? ` · ${item.color}` : ""}
+                  </div>
                   <div className="cart-item-price">{formatPrice(item.price * item.qty)}</div>
                   <div className="cart-item-qty">
                     <button className="qty-btn" type="button" onClick={() => changeQty(item.cartId, -1)}>-</button>

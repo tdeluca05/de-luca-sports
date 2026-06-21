@@ -30,12 +30,14 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
       setTimeout(() => setMissingSize(false), 1200);
       return;
     }
+    const colorNombre = found!.colores?.find((c) => c.hex === selectedColor)?.nombre;
     addItem({
-      cartId: `${found!.id}-${selectedSize}`,
+      cartId: `${found!.id}-${selectedSize}-${colorNombre ?? ""}`,
       productId: found!.id,
       name: fullName,
       price: found!.precio,
       size: selectedSize,
+      color: colorNombre,
       qty: 1,
     });
     setFeedback(true);

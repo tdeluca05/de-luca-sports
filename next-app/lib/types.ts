@@ -19,11 +19,12 @@ export interface Producto {
 }
 
 export interface CartItem {
-  cartId: string;       // "{productId}-{talle}"
+  cartId: string;       // "{productId}-{talle}-{color}"
   productId: number;
   name: string;
   price: number;
   size: number | string;
+  color?: string;       // nombre del color elegido
   qty: number;
 }
 
