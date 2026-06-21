@@ -74,9 +74,8 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
 
         {/* Info */}
         <div className="detalle-info">
-          <span className="product-brand" style={{ fontSize: "0.85rem" }}>{brandName}</span>
+          <span className="detalle-marca">{brandName}</span>
           <h1 className="detalle-nombre">{found.nombre}</h1>
-          <p className="product-tag" style={{ marginBottom: "0.5rem" }}>{found.tag}</p>
           <div className="detalle-precio">{"$" + found.precio.toLocaleString("es-AR")}</div>
 
           {/* Colores */}

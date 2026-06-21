@@ -1707,39 +1707,63 @@ button {
 .detalle-main-img img { width: 100%; height: 100%; object-fit: contain; }
 
 /* Info */
-.detalle-nombre {
-  font-size: 1.8rem;
+.detalle-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 0.5rem;
+}
+.detalle-marca {
+  display: inline-block;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.85rem;
   font-weight: 700;
-  margin: 0.25rem 0 0.5rem;
-  line-height: 1.2;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+.detalle-nombre {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.15;
 }
 .detalle-precio {
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
   font-weight: 700;
-  color: var(--red, #e53e3e);
-  margin: 0.75rem 0;
+  color: var(--primary);
+  margin: 1rem 0 0;
 }
 .detalle-section {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 360px;
 }
 .detalle-section-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: #777;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+  text-align: center;
 }
 
 /* Color swatches */
 .detalle-colors {
   display: flex;
+  justify-content: center;
   gap: 0.6rem;
 }
 .color-swatch {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1754,6 +1778,14 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
+}
+
+/* Botón y descripción centrados dentro de la columna */
+.detalle-info > .btn {
+  max-width: 360px;
+}
+.detalle-info .detalle-section p {
+  text-align: center;
 }
 
 @media (max-width: 768px) {
