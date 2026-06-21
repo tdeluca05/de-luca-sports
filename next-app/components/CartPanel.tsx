@@ -149,11 +149,11 @@ export default function CartPanel() {
               <span>Subtotal</span>
               <strong>{formatPrice(total)}</strong>
             </div>
-            <button className="btn btn-secondary btn-checkout" type="button" onClick={clearCart}>
-              Vaciar carrito
-            </button>
             <button className="btn btn-primary btn-checkout" type="button" onClick={() => setStep("form")}>
               Proceder con la compra
+            </button>
+            <button className="btn btn-secondary btn-checkout" type="button" onClick={clearCart}>
+              Vaciar carrito
             </button>
           </div>
         )}
