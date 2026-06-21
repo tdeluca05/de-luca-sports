@@ -1337,6 +1337,7 @@ button {
 .checkout-form {
   display: grid;
   gap: 12px;
+  padding: 20px 24px 24px;
 }
 
 .btn-back-cart {
@@ -1413,6 +1414,7 @@ button {
 }
 
 .checkout-success {
+  margin: 20px 24px;
   padding: 14px 16px;
   border-radius: 16px;
   background: rgba(29, 107, 73, 0.08);
