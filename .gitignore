@@ -9,6 +9,7 @@ node_modules/
 # Next.js
 next-app/.next/
 next-app/out/
+next-app/*.tsbuildinfo
 
 # Sistema
 .DS_Store
