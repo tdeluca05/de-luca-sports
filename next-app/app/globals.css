@@ -1514,6 +1514,43 @@ button {
   }
 }
 
+/* ── Carrusel destacados (inicio) ── */
+.featured-carousel {
+  position: relative;
+  margin-top: 8px;
+}
+.featured-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 2px 12px;
+}
+.featured-track::-webkit-scrollbar {
+  display: none;
+}
+.featured-track .product-card {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 1100px) {
+  .featured-track {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 620px) {
+  .featured-track {
+    grid-auto-columns: 86%;
+  }
+  .featured-carousel .products-nav {
+    display: none;
+  }
+}
+
 /* ── Color dots (card) ── */
 .product-colors {
   display: flex;

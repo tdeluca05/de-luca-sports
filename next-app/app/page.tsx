@@ -1,12 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartPanel from "@/components/CartPanel";
-import ProductCard from "@/components/ProductCard";
+import FeaturedCarousel from "@/components/FeaturedCarousel";
 import NewsletterForm from "@/components/NewsletterForm";
 import { PRODUCTOS } from "@/lib/productos";
 
-// Los 3 productos destacados que se muestran en el inicio
-const DESTACADOS = PRODUCTOS.filter((p) => [1, 3, 4].includes(p.id));
+// Productos que se muestran en el carrusel del inicio
+const DESTACADOS = PRODUCTOS.filter((p) => p.activo !== false);
 
 export default function HomePage() {
   return (
@@ -54,13 +54,7 @@ export default function HomePage() {
               Ver catalogo completo
             </a>
           </div>
-          <div className="products-viewport">
-            <div className="products-grid">
-              {DESTACADOS.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
-            </div>
-          </div>
+          <FeaturedCarousel products={DESTACADOS} />
         </section>
 
         {/* Newsletter */}
