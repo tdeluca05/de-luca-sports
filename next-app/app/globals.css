@@ -228,13 +228,13 @@ button {
 }
 
 .btn-whatsapp {
-  background: var(--accent);
+  background: #25d366;
   color: #fff;
   padding: 14px 24px;
 }
 
 .btn-whatsapp:hover {
-  background: var(--accent-dark);
+  background: #1da851;
 }
 
 .cart-counter {

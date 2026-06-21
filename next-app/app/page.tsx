@@ -87,14 +87,6 @@ export default function HomePage() {
                 >
                   Hablar por WhatsApp
                 </a>
-                <a
-                  href="https://instagram.com/delucasportok"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-secondary light"
-                >
-                  Ver Instagram
-                </a>
               </div>
             </div>
             <div className="contact-grid">
