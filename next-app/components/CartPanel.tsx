@@ -105,9 +105,6 @@ export default function CartPanel() {
         {/* Formulario de checkout */}
         {step === "form" && (
           <form className="checkout-form" onSubmit={handleSubmit}>
-            <button type="button" className="btn btn-secondary btn-back-cart" onClick={() => setStep("cart")}>
-              Volver al carrito
-            </button>
             <div className="checkout-grid">
               <input required placeholder="Nombre y apellido" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
               <input required type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
@@ -130,6 +127,9 @@ export default function CartPanel() {
             </div>
             <button type="submit" className="btn btn-primary btn-checkout">
               Finalizar compra
+            </button>
+            <button type="button" className="btn btn-secondary btn-back-cart" onClick={() => setStep("cart")}>
+              Volver al carrito
             </button>
           </form>
         )}
