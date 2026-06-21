@@ -8,7 +8,7 @@ import { PRODUCTOS } from "@/lib/productos";
 export default function ProductoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const found = PRODUCTOS.find((p) => p.id === Number(id));
 
   const [mainImage, setMainImage] = useState(0);
@@ -24,11 +24,12 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
   const brandName = found.marca.charAt(0).toUpperCase() + found.marca.slice(1);
   const fullName = `${brandName} ${found.nombre}`;
 
-  function handleAddToCart() {
+  // Suma el producto al carrito. Devuelve true si lo logró (false si falta el talle).
+  function agregarAlCarrito(): boolean {
     if (!selectedSize) {
       setMissingSize(true);
       setTimeout(() => setMissingSize(false), 1200);
-      return;
+      return false;
     }
     const colorNombre = found!.colores?.find((c) => c.hex === selectedColor)?.nombre;
     addItem({
@@ -40,8 +41,22 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
       color: colorNombre,
       qty: 1,
     });
-    setFeedback(true);
-    setTimeout(() => setFeedback(false), 1400);
+    return true;
+  }
+
+  // "Agregar al carrito": suma y muestra feedback, sin abrir el carrito
+  function handleAddToCart() {
+    if (agregarAlCarrito()) {
+      setFeedback(true);
+      setTimeout(() => setFeedback(false), 1400);
+    }
+  }
+
+  // "Comprar ahora": suma y abre el carrito para finalizar la compra
+  function handleComprar() {
+    if (agregarAlCarrito()) {
+      openCart();
+    }
   }
 
   const sizesLabel = `Seleccionar Talle${found.tallesNota ? ` ${found.tallesNota}` : ""}`;
@@ -116,15 +131,23 @@ export default function ProductoPage({ params }: { params: Promise<{ id: string 
             </div>
           </div>
 
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={handleAddToCart}
-            disabled={feedback}
-            style={{ width: "100%", padding: "1rem", fontSize: "1rem", marginTop: "0.5rem" }}
-          >
-            {feedback ? "¡Agregado al carrito!" : "Agregar al carrito"}
-          </button>
+          <div className="detalle-acciones">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleComprar}
+            >
+              Comprar ahora
+            </button>
+            <button
+              className="btn btn-secondary"
+              type="button"
+              onClick={handleAddToCart}
+              disabled={feedback}
+            >
+              {feedback ? "¡Agregado al carrito!" : "Agregar al carrito"}
+            </button>
+          </div>
 
           {/* Descripción */}
           <div className="detalle-section">

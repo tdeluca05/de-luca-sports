@@ -1826,9 +1826,19 @@ button {
   gap: 0.5rem;
 }
 
-/* Botón y descripción centrados dentro de la columna */
-.detalle-info > .btn {
+/* Botones de acción del detalle */
+.detalle-acciones {
+  width: 100%;
   max-width: 360px;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.detalle-acciones .btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
 }
 .detalle-info .detalle-section p {
   text-align: center;
