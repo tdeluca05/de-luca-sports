@@ -177,6 +177,28 @@ button {
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* Círculo de Instagram (contacto) */
+.ig-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #111111;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: transform var(--transition), background-color var(--transition);
+}
+.ig-circle svg {
+  width: 24px;
+  height: 24px;
+}
+.ig-circle:hover {
+  transform: translateY(-2px);
+  background: #000000;
+}
+
 /* Bandera de Italia: verde - blanco - rojo */
 .pill-whatsapp {
   background: #1ebe57;
