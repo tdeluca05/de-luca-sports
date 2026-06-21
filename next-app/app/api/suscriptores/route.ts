@@ -24,8 +24,11 @@ export async function POST(request: Request) {
       .from("suscriptores")
       .insert({ email: limpio });
 
-    // 23505 = violación de unique (email ya suscripto). No es un error real.
-    if (error && error.code !== "23505") {
+    if (error) {
+      // 23505 = violación de unique → el email ya estaba suscripto
+      if (error.code === "23505") {
+        return NextResponse.json({ ok: true, duplicado: true }, { status: 200 });
+      }
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 

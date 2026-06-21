@@ -20,8 +20,13 @@ export default function NewsletterForm() {
       });
 
       if (res.ok) {
+        const data = await res.json().catch(() => ({}));
         setEstado("ok");
-        setMensaje("¡Listo! Te vamos a avisar con las novedades.");
+        setMensaje(
+          data.duplicado
+            ? "Este email ya está suscripto."
+            : "¡Listo! Te vamos a avisar con las novedades."
+        );
         setEmail("");
       } else {
         const data = await res.json().catch(() => ({}));
