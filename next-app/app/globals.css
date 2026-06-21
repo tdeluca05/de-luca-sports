@@ -1627,6 +1627,15 @@ button {
 .featured-track::-webkit-scrollbar {
   display: none;
 }
+/* Sin sombra dentro del carrusel: el overflow del scroll la recortaba
+   y formaba un rectángulo gris. Las cards quedan definidas por el borde. */
+.featured-track .product-card {
+  box-shadow: none;
+}
+.featured-track .product-card:hover {
+  box-shadow: none;
+  transform: translateY(-4px);
+}
 .featured-carousel .products-nav.prev {
   left: 0;
 }
