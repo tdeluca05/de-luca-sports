@@ -225,7 +225,10 @@ export default function CheckoutPage() {
 
           {/* Columna derecha: resumen */}
           <aside className="checkout-summary">
-            <h2>Tu pedido</h2>
+            <div className="checkout-summary-head">
+              <h2>Tu pedido</h2>
+              <img className="checkout-logo" src="/img/r.png" alt="De Luca Sport" />
+            </div>
             <div className="checkout-items">
               {items.map((item) => (
                 <div key={item.cartId} className="checkout-item">

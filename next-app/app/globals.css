@@ -1762,21 +1762,34 @@ button {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 18px;
-  padding: 1.9rem;
+  padding: 2.2rem;
   position: sticky;
   top: 100px;
+  display: flex;
+  flex-direction: column;
 }
-.checkout-summary h2 {
+.checkout-summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+}
+.checkout-summary-head h2 {
   font-family: var(--font-heading);
   text-transform: uppercase;
   font-size: 1.35rem;
-  margin: 0 0 1.4rem;
+  margin: 0;
+}
+.checkout-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
 }
 .checkout-items {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  margin-bottom: 1.4rem;
+  gap: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 .checkout-item {
   display: flex;
