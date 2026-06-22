@@ -1686,6 +1686,43 @@ button {
   margin-top: 1.2rem;
 }
 
+/* Teléfono con código de país */
+.phone-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+.phone-group.input-error .phone-pais,
+.phone-group.input-error .phone-num {
+  border-color: var(--primary);
+  background: rgba(217, 45, 32, 0.04);
+}
+.phone-pais {
+  flex: 0 0 auto;
+  width: 92px;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  padding: 13px 8px;
+  color: var(--text);
+  outline: none;
+}
+.phone-num {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  padding: 13px 14px;
+  color: var(--text);
+  outline: none;
+}
+.phone-pais:focus,
+.phone-num:focus {
+  border-color: rgba(217, 45, 32, 0.45);
+  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.08);
+}
+
 /* Opciones de entrega */
 .checkout-entrega {
   display: grid;

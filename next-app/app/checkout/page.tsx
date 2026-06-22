@@ -17,6 +17,21 @@ const PROVINCIAS = [
   "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán",
 ];
 
+// Códigos de país para el teléfono
+const PAISES = [
+  { code: "+54", label: "🇦🇷 +54" },
+  { code: "+598", label: "🇺🇾 +598" },
+  { code: "+56", label: "🇨🇱 +56" },
+  { code: "+595", label: "🇵🇾 +595" },
+  { code: "+591", label: "🇧🇴 +591" },
+  { code: "+55", label: "🇧🇷 +55" },
+  { code: "+51", label: "🇵🇪 +51" },
+  { code: "+57", label: "🇨🇴 +57" },
+  { code: "+52", label: "🇲🇽 +52" },
+  { code: "+34", label: "🇪🇸 +34" },
+  { code: "+1", label: "🇺🇸 +1" },
+];
+
 // Nombre válido = solo letras y al menos dos palabras de 2+ letras (nombre y apellido)
 function nombreValido(n: string): boolean {
   const limpio = n.trim();
@@ -36,7 +51,7 @@ export default function CheckoutPage() {
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
 
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", dni: "",
+    name: "", email: "", pais: "+54", phone: "", dni: "",
     delivery: "retiro",
     calle: "", numero: "", piso: "", depto: "",
     localidad: "", provincia: "", cp: "",
@@ -101,7 +116,7 @@ export default function CheckoutPage() {
           formData: {
             name: form.name.trim(),
             email: form.email.trim(),
-            phone: `${form.phone} (DNI ${form.dni})`,
+            phone: `${form.pais} ${form.phone} (DNI ${form.dni})`,
             delivery: form.delivery,
             payment: "mercadopago",
             address: armarDireccion(),
@@ -158,8 +173,13 @@ export default function CheckoutPage() {
                   onChange={(e) => set("name", e.target.value.replace(/[0-9]/g, ""))} />
                 <input className={cls("email")} type="email" placeholder="Email *" value={form.email}
                   onChange={(e) => set("email", e.target.value)} />
-                <input className={cls("phone")} type="tel" placeholder="Teléfono *" value={form.phone}
-                  onChange={(e) => set("phone", e.target.value.replace(/[^\d\s()+-]/g, ""))} />
+                <div className={`phone-group${invalid.phone ? " input-error" : ""}`}>
+                  <select className="phone-pais" value={form.pais} onChange={(e) => set("pais", e.target.value)}>
+                    {PAISES.map((p) => <option key={p.code} value={p.code}>{p.label}</option>)}
+                  </select>
+                  <input className="phone-num" type="tel" placeholder="Teléfono *" value={form.phone}
+                    onChange={(e) => set("phone", e.target.value.replace(/[^\d\s()-]/g, ""))} />
+                </div>
                 <input className={cls("dni")} placeholder="DNI *" value={form.dni}
                   onChange={(e) => set("dni", e.target.value.replace(/\D/g, ""))} />
               </div>
