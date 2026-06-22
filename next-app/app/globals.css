@@ -1676,6 +1676,12 @@ button {
   border-color: rgba(217, 45, 32, 0.45);
   box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.08);
 }
+/* Campo con error: borde rojo */
+.checkout-fields input.input-error,
+.checkout-fields select.input-error {
+  border-color: var(--primary);
+  background: rgba(217, 45, 32, 0.04);
+}
 .checkout-direccion {
   margin-top: 1.2rem;
 }
@@ -1736,8 +1742,21 @@ button {
 }
 .checkout-item {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.9rem;
+}
+.checkout-item-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+.checkout-item-body {
+  flex: 1;
+  min-width: 0;
 }
 .checkout-item-name {
   font-weight: 600;

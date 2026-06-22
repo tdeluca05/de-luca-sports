@@ -5,8 +5,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/components/CartContext";
+import { PRODUCTOS } from "@/lib/productos";
 
-const NOMBRE_REGEX = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]{2,}$/;
+const SOLO_LETRAS = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]+$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PROVINCIAS = [
@@ -16,10 +17,23 @@ const PROVINCIAS = [
   "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán",
 ];
 
+// Nombre válido = solo letras y al menos dos palabras de 2+ letras (nombre y apellido)
+function nombreValido(n: string): boolean {
+  const limpio = n.trim();
+  if (!SOLO_LETRAS.test(limpio)) return false;
+  const palabras = limpio.split(/\s+/).filter((w) => w.length >= 2);
+  return palabras.length >= 2;
+}
+
+function imagenDe(productId: number): string {
+  return PRODUCTOS.find((p) => p.id === productId)?.imagenes[0] || "";
+}
+
 export default function CheckoutPage() {
   const { items, total } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [invalid, setInvalid] = useState<Record<string, boolean>>({});
 
   const [form, setForm] = useState({
     name: "", email: "", phone: "", dni: "",
@@ -30,6 +44,8 @@ export default function CheckoutPage() {
 
   function set<K extends keyof typeof form>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
+    // Al corregir, sacamos el resaltado de error de ese campo
+    setInvalid((prev) => (prev[key] ? { ...prev, [key]: false } : prev));
   }
 
   function formatPrice(value: number) {
@@ -37,17 +53,27 @@ export default function CheckoutPage() {
   }
 
   function validar(): string | null {
-    if (!NOMBRE_REGEX.test(form.name.trim())) return "Ingresá un nombre y apellido válido (solo letras).";
-    if (!EMAIL_REGEX.test(form.email.trim())) return "Ingresá un email válido (ej: nombre@gmail.com).";
-    if (form.phone.replace(/\D/g, "").length < 6) return "Ingresá un teléfono válido.";
-    if (form.dni.replace(/\D/g, "").length < 7) return "Ingresá un DNI válido.";
+    const inv: Record<string, boolean> = {};
+    let msg: string | null = null;
+    const fail = (field: string, m: string) => {
+      inv[field] = true;
+      if (!msg) msg = m;
+    };
+
+    if (!nombreValido(form.name)) fail("name", "Ingresá nombre y apellido (al menos dos palabras, solo letras).");
+    if (!EMAIL_REGEX.test(form.email.trim())) fail("email", "Ingresá un email válido (ej: nombre@gmail.com).");
+    if (form.phone.replace(/\D/g, "").length < 6) fail("phone", "Ingresá un teléfono válido.");
+    if (form.dni.replace(/\D/g, "").length < 7) fail("dni", "Ingresá un DNI válido (7 u 8 números).");
     if (form.delivery === "envio") {
-      if (!form.calle.trim() || !form.numero.trim()) return "Completá la calle y el número.";
-      if (!form.localidad.trim()) return "Completá la localidad.";
-      if (!form.provincia) return "Elegí la provincia.";
-      if (form.cp.replace(/\D/g, "").length < 3) return "Ingresá un código postal válido.";
+      if (!form.calle.trim()) fail("calle", "Completá la calle.");
+      if (!form.numero.trim()) fail("numero", "Completá el número.");
+      if (!form.localidad.trim()) fail("localidad", "Completá la localidad.");
+      if (!form.provincia) fail("provincia", "Elegí la provincia.");
+      if (form.cp.replace(/\D/g, "").length < 3) fail("cp", "Ingresá un código postal válido.");
     }
-    return null;
+
+    setInvalid(inv);
+    return msg;
   }
 
   function armarDireccion(): string {
@@ -86,7 +112,7 @@ export default function CheckoutPage() {
       const data = await res.json();
       const url = data.initPoint || data.sandboxInitPoint;
       if (res.ok && url) {
-        window.location.href = url; // Redirige a la pantalla de pago de Mercado Pago
+        window.location.href = url;
       } else {
         setError(data.error || "No se pudo iniciar el pago. Probá de nuevo.");
         setLoading(false);
@@ -96,6 +122,8 @@ export default function CheckoutPage() {
       setLoading(false);
     }
   }
+
+  const cls = (field: string) => (invalid[field] ? "input-error" : "");
 
   // Carrito vacío
   if (items.length === 0) {
@@ -126,13 +154,13 @@ export default function CheckoutPage() {
             <section className="checkout-card">
               <h2>Tus datos</h2>
               <div className="checkout-fields">
-                <input placeholder="Nombre y apellido *" value={form.name}
+                <input className={cls("name")} placeholder="Nombre y apellido *" value={form.name}
                   onChange={(e) => set("name", e.target.value.replace(/[0-9]/g, ""))} />
-                <input type="email" placeholder="Email *" value={form.email}
+                <input className={cls("email")} type="email" placeholder="Email *" value={form.email}
                   onChange={(e) => set("email", e.target.value)} />
-                <input type="tel" placeholder="Teléfono *" value={form.phone}
+                <input className={cls("phone")} type="tel" placeholder="Teléfono *" value={form.phone}
                   onChange={(e) => set("phone", e.target.value.replace(/[^\d\s()+-]/g, ""))} />
-                <input placeholder="DNI *" value={form.dni}
+                <input className={cls("dni")} placeholder="DNI *" value={form.dni}
                   onChange={(e) => set("dni", e.target.value.replace(/\D/g, ""))} />
               </div>
             </section>
@@ -160,13 +188,13 @@ export default function CheckoutPage() {
 
               {form.delivery === "envio" && (
                 <div className="checkout-fields checkout-direccion">
-                  <input placeholder="Calle *" value={form.calle} onChange={(e) => set("calle", e.target.value)} style={{ gridColumn: "span 2" }} />
-                  <input placeholder="Número *" value={form.numero} onChange={(e) => set("numero", e.target.value)} />
+                  <input className={cls("calle")} placeholder="Calle *" value={form.calle} onChange={(e) => set("calle", e.target.value)} style={{ gridColumn: "span 2" }} />
+                  <input className={cls("numero")} placeholder="Número *" value={form.numero} onChange={(e) => set("numero", e.target.value.replace(/\D/g, ""))} />
                   <input placeholder="Piso" value={form.piso} onChange={(e) => set("piso", e.target.value)} />
                   <input placeholder="Departamento" value={form.depto} onChange={(e) => set("depto", e.target.value)} />
-                  <input placeholder="Código Postal *" value={form.cp} onChange={(e) => set("cp", e.target.value.replace(/\D/g, ""))} />
-                  <input placeholder="Localidad *" value={form.localidad} onChange={(e) => set("localidad", e.target.value)} />
-                  <select value={form.provincia} onChange={(e) => set("provincia", e.target.value)}>
+                  <input className={cls("cp")} placeholder="Código Postal *" value={form.cp} onChange={(e) => set("cp", e.target.value.replace(/\D/g, ""))} />
+                  <input className={cls("localidad")} placeholder="Localidad *" value={form.localidad} onChange={(e) => set("localidad", e.target.value)} />
+                  <select className={cls("provincia")} value={form.provincia} onChange={(e) => set("provincia", e.target.value)}>
                     <option value="">Provincia *</option>
                     {PROVINCIAS.map((p) => <option key={p} value={p}>{p}</option>)}
                   </select>
@@ -181,7 +209,8 @@ export default function CheckoutPage() {
             <div className="checkout-items">
               {items.map((item) => (
                 <div key={item.cartId} className="checkout-item">
-                  <div>
+                  <img className="checkout-item-img" src={imagenDe(item.productId)} alt={item.name} />
+                  <div className="checkout-item-body">
                     <div className="checkout-item-name">{item.name}</div>
                     <div className="checkout-item-meta">
                       Talle {item.size}{item.color ? ` · ${item.color}` : ""} · x{item.qty}
