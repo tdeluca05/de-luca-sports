@@ -1625,6 +1625,214 @@ button {
   }
 }
 
+/* ── Página de checkout ── */
+.checkout-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.checkout-title {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin: 1rem 0 2rem;
+}
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.checkout-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.checkout-card h2 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin: 0 0 1.2rem;
+}
+.checkout-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.checkout-fields input,
+.checkout-fields select {
+  width: 100%;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  padding: 13px 14px;
+  color: var(--text);
+  outline: none;
+}
+.checkout-fields input:focus,
+.checkout-fields select:focus {
+  border-color: rgba(217, 45, 32, 0.45);
+  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.08);
+}
+.checkout-direccion {
+  margin-top: 1.2rem;
+}
+
+/* Opciones de entrega */
+.checkout-entrega {
+  display: grid;
+  gap: 0.8rem;
+}
+.entrega-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+.entrega-opt.active {
+  border-color: var(--primary);
+  background: rgba(217, 45, 32, 0.04);
+}
+.entrega-opt input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+.entrega-opt strong {
+  display: block;
+  font-size: 0.98rem;
+}
+.entrega-opt span {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* Resumen del pedido */
+.checkout-summary {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 100px;
+}
+.checkout-summary h2 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin: 0 0 1.2rem;
+}
+.checkout-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.checkout-item-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.checkout-item-meta {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+.checkout-item-price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.2rem;
+}
+.checkout-total strong {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+.checkout-pagar {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+}
+.checkout-nota {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin: 0.8rem 0 0;
+}
+.checkout-vacio {
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+.checkout-vacio h1 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+}
+.checkout-vacio .btn {
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+
+/* Páginas de resultado de pago */
+.pago-resultado {
+  max-width: 520px;
+  margin: 8vh auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.pago-icono {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  color: #fff;
+}
+.pago-ok { background: #1ebe57; }
+.pago-fail { background: var(--primary); }
+.pago-pend { background: var(--warning); }
+.pago-resultado h1 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+}
+.pago-resultado p {
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+  .checkout-summary {
+    position: static;
+  }
+}
+@media (max-width: 520px) {
+  .checkout-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Carrusel destacados (inicio) ── */
 .featured-carousel {
   position: relative;
