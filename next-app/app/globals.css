@@ -1698,9 +1698,9 @@ button {
   border-color: var(--primary);
   background: rgba(217, 45, 32, 0.04);
 }
-.phone-pais {
-  flex: 0 0 auto;
-  width: 92px;
+.phone-group .phone-pais {
+  flex: 0 0 96px;
+  width: 96px;
   border: 1px solid rgba(29, 31, 30, 0.14);
   border-radius: 12px;
   background: #fff;
@@ -1708,8 +1708,9 @@ button {
   color: var(--text);
   outline: none;
 }
-.phone-num {
-  flex: 1;
+.phone-group .phone-num {
+  flex: 1 1 auto;
+  width: auto;
   min-width: 0;
   border: 1px solid rgba(29, 31, 30, 0.14);
   border-radius: 12px;
