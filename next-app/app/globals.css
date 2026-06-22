@@ -1137,6 +1137,24 @@ button {
   color: var(--text-soft);
 }
 
+.footer-centered {
+  width: min(var(--max-width), calc(100% - 32px));
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text-soft);
+}
+.footer-centered p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.footer-wpp {
+  color: #1ebe57;
+  font-weight: 700;
+}
+.footer-wpp:hover {
+  text-decoration: underline;
+}
+
 .footer-links {
   display: flex;
   gap: 16px;
