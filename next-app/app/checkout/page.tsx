@@ -19,17 +19,17 @@ const PROVINCIAS = [
 
 // Códigos de país para el teléfono
 const PAISES = [
-  { code: "+54", label: "🇦🇷 +54" },
-  { code: "+598", label: "🇺🇾 +598" },
-  { code: "+56", label: "🇨🇱 +56" },
-  { code: "+595", label: "🇵🇾 +595" },
-  { code: "+591", label: "🇧🇴 +591" },
-  { code: "+55", label: "🇧🇷 +55" },
-  { code: "+51", label: "🇵🇪 +51" },
-  { code: "+57", label: "🇨🇴 +57" },
-  { code: "+52", label: "🇲🇽 +52" },
-  { code: "+34", label: "🇪🇸 +34" },
-  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+54", label: "AR +54" },
+  { code: "+598", label: "UY +598" },
+  { code: "+56", label: "CL +56" },
+  { code: "+595", label: "PY +595" },
+  { code: "+591", label: "BO +591" },
+  { code: "+55", label: "BR +55" },
+  { code: "+51", label: "PE +51" },
+  { code: "+57", label: "CO +57" },
+  { code: "+52", label: "MX +52" },
+  { code: "+34", label: "ES +34" },
+  { code: "+1", label: "US +1" },
 ];
 
 // Nombre válido = solo letras y al menos dos palabras de 2+ letras (nombre y apellido)

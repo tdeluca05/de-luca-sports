@@ -1691,6 +1691,7 @@ button {
   display: flex;
   gap: 0.5rem;
   align-items: stretch;
+  grid-column: 1 / -1; /* ocupa todo el ancho para que entre el número */
 }
 .phone-group.input-error .phone-pais,
 .phone-group.input-error .phone-num {
