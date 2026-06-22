@@ -4,10 +4,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <div>
-          <strong>De Luca Sport</strong>
-          <p>Catalogo digital de zapatillas running con foco en claridad, confianza y accion.</p>
-        </div>
         <div className="footer-links">
           <Link href="/">Inicio</Link>
           <Link href="/catalogo">Catalogo</Link>

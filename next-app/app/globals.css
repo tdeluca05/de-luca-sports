@@ -1131,7 +1131,7 @@ button {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1.2fr auto auto;
+  grid-template-columns: auto 1fr;
   gap: 18px;
   align-items: center;
   color: var(--text-soft);
