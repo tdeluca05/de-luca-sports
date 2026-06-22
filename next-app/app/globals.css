@@ -907,6 +907,16 @@ button {
   padding: 4px 0 12px;
 }
 
+/* Aparición suave de los productos al filtrar (solo opacidad para no
+   interferir con el hover que usa transform) */
+@keyframes cardFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.products-grid .product-card {
+  animation: cardFadeIn 320ms ease both;
+}
+
 .products-grid.is-reordering {
   transition: none;
 }
