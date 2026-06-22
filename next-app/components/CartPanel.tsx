@@ -81,7 +81,7 @@ export default function CartPanel() {
               <strong>{formatPrice(total)}</strong>
             </div>
             <button className="btn btn-primary btn-checkout" type="button" onClick={irAlCheckout}>
-              Finalizar compra
+              Proceder con la compra
             </button>
             <button className="btn btn-secondary btn-checkout" type="button" onClick={clearCart}>
               Vaciar carrito
