@@ -1639,7 +1639,7 @@ button {
 }
 .checkout-layout {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1.2fr 1.05fr;
   gap: 2rem;
   align-items: start;
 }
@@ -1761,33 +1761,33 @@ button {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 18px;
-  padding: 1.5rem;
+  padding: 1.9rem;
   position: sticky;
   top: 100px;
 }
 .checkout-summary h2 {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  font-size: 1.2rem;
-  margin: 0 0 1.2rem;
+  font-size: 1.35rem;
+  margin: 0 0 1.4rem;
 }
 .checkout-items {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 .checkout-item {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
 }
 .checkout-item-img {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
   object-fit: contain;
-  background: #fff;
+  background: #f7f7f7;
   border: 1px solid rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
 }
@@ -1797,11 +1797,12 @@ button {
 }
 .checkout-item-name {
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 1rem;
 }
 .checkout-item-meta {
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--text-soft);
+  margin-top: 2px;
 }
 .checkout-item-price {
   font-weight: 700;
