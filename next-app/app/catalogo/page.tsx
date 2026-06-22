@@ -20,17 +20,31 @@ function normalizar(texto: string): string {
     .replace(/\p{Diacritic}/gu, "");
 }
 
+const PRECIO_LIMITE = 300000; // tope del rango de precios
+const PRECIO_STEP = 5000;
+
 export default function CatalogoPage() {
   const [brand, setBrand] = useState<FilterBrand>("all");
   const [deporte, setDeporte] = useState<FilterDeporte>("all");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortOrder>("default");
+  const [precioMin, setPrecioMin] = useState(0);
+  const [precioMax, setPrecioMax] = useState(PRECIO_LIMITE);
+
+  // Los thumbs no se cruzan: el mínimo siempre queda por debajo del máximo
+  function cambiarMin(v: number) {
+    setPrecioMin(Math.min(v, precioMax - PRECIO_STEP));
+  }
+  function cambiarMax(v: number) {
+    setPrecioMax(Math.max(v, precioMin + PRECIO_STEP));
+  }
 
   const filtered = useMemo(() => {
     let result = PRODUCTOS.filter((p) => p.activo !== false);
 
     if (brand !== "all") result = result.filter((p) => p.marca === brand);
     if (deporte !== "all") result = result.filter((p) => p.deporte === deporte);
+    result = result.filter((p) => p.precio >= precioMin && p.precio <= precioMax);
     if (search.trim()) {
       // Separa la búsqueda en palabras (ignora espacios de más)
       const terms = normalizar(search).split(/\s+/).filter(Boolean);
@@ -47,7 +61,7 @@ export default function CatalogoPage() {
     if (sort === "name-asc") result = [...result].sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
 
     return result;
-  }, [brand, deporte, search, sort]);
+  }, [brand, deporte, search, sort, precioMin, precioMax]);
 
   const marcas: { value: FilterBrand; label: string }[] = [
     { value: "all", label: "Todos" },
@@ -123,6 +137,38 @@ export default function CatalogoPage() {
                   <option value="name-asc">A-Z</option>
                 </select>
               </label>
+            </div>
+
+            {/* Rango de precios */}
+            <div className="price-range">
+              <div className="price-range-top">
+                <span className="price-range-label">Rango de precio</span>
+                <span className="price-range-values">
+                  ${precioMin.toLocaleString("es-AR")} – ${precioMax.toLocaleString("es-AR")}
+                </span>
+              </div>
+              <div className="price-range-slider">
+                <div className="price-range-track" />
+                <div
+                  className="price-range-fill"
+                  style={{
+                    left: `${(precioMin / PRECIO_LIMITE) * 100}%`,
+                    right: `${100 - (precioMax / PRECIO_LIMITE) * 100}%`,
+                  }}
+                />
+                <input
+                  type="range" min={0} max={PRECIO_LIMITE} step={PRECIO_STEP}
+                  value={precioMin}
+                  aria-label="Precio mínimo"
+                  onChange={(e) => cambiarMin(Number(e.target.value))}
+                />
+                <input
+                  type="range" min={0} max={PRECIO_LIMITE} step={PRECIO_STEP}
+                  value={precioMax}
+                  aria-label="Precio máximo"
+                  onChange={(e) => cambiarMax(Number(e.target.value))}
+                />
+              </div>
             </div>
 
             <p className="catalog-note">
