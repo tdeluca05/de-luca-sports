@@ -31,11 +31,17 @@ export default function NewsletterForm() {
       } else {
         const data = await res.json().catch(() => ({}));
         setEstado("error");
-        setMensaje(data.error || "No pudimos suscribirte. Probá de nuevo.");
+        // Solo mostramos errores de validación (400, ej: email inválido).
+        // Errores del servidor (500) → mensaje genérico, sin filtrar detalles técnicos.
+        setMensaje(
+          res.status === 400 && data.error
+            ? data.error
+            : "No pudimos completar la suscripción en este momento. Escribinos por WhatsApp."
+        );
       }
     } catch {
       setEstado("error");
-      setMensaje("No pudimos suscribirte. Probá de nuevo.");
+      setMensaje("No pudimos completar la suscripción en este momento. Escribinos por WhatsApp.");
     }
   }
 
