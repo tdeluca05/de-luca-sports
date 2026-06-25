@@ -452,7 +452,7 @@ button {
 
 .hero-copy h1 {
   margin: 18px 0 0;
-  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
   max-width: 10ch;
   text-shadow:
     0 10px 30px rgba(0, 0, 0, 0.4),
@@ -544,7 +544,7 @@ button {
 }
 
 .products-section {
-  padding: 74px 0;
+  padding: 52px 0;
 }
 
 .newsletter-section {
@@ -610,7 +610,7 @@ button {
   margin: 14px auto 10px;
   max-width: 18ch;
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
   line-height: 1.02;
   text-transform: uppercase;
 }
@@ -690,7 +690,7 @@ button {
 
 .section-heading h2,
 .contact-copy h2 {
-  font-size: clamp(2.1rem, 5vw, 4rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
 }
 
 .section-heading p,
@@ -982,7 +982,7 @@ button {
 
 .product-gallery {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #ffffff;
 }
@@ -1125,7 +1125,7 @@ button {
 }
 
 .product-name {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1;
   margin: 0;
 }
@@ -1136,7 +1136,7 @@ button {
 
 .product-price {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.45rem;
   line-height: 1;
   color: var(--primary);
 }
@@ -2303,13 +2303,6 @@ button {
   .contact-copy p {
     font-size: 0.95rem;
   }
-  .product-name {
-    font-size: 1.25rem;
-  }
-  .product-price {
-    font-size: 1.5rem;
-  }
-
   /* Espaciados más compactos */
   .products-section,
   .contact-section {
