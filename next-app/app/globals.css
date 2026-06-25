@@ -2018,6 +2018,43 @@ button {
   align-items: center;
   gap: 10px;
 }
+
+/* Poppers de los costados (los que "tiran" el confeti) */
+.popper {
+  position: fixed;
+  top: 42%;
+  font-size: 5.5rem;
+  pointer-events: none;
+  z-index: 5;
+  animation: popperShake 1.6s ease-in-out infinite;
+}
+.popper-left {
+  left: 3%;
+  transform-origin: bottom left;
+}
+.popper-right {
+  right: 3%;
+  transform: scaleX(-1);
+  transform-origin: bottom right;
+}
+@keyframes popperShake {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(4deg); }
+}
+.popper-right {
+  animation-name: popperShakeRight;
+}
+@keyframes popperShakeRight {
+  0%, 100% { transform: scaleX(-1) rotate(-8deg); }
+  50% { transform: scaleX(-1) rotate(4deg); }
+}
+@media (max-width: 600px) {
+  .popper {
+    font-size: 3rem;
+    top: auto;
+    bottom: 8%;
+  }
+}
 .btn-festin {
   width: 48px;
   height: 48px;

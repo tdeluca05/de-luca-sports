@@ -54,6 +54,11 @@ export default function PagoExitoPage() {
   return (
     <>
       <Header />
+
+      {/* Poppers que "disparan" el confeti desde los costados */}
+      <span className="popper popper-left" aria-hidden="true">🎉</span>
+      <span className="popper popper-right" aria-hidden="true">🎉</span>
+
       <div className="pago-resultado">
         <div className="pago-icono pago-ok">✓</div>
         <h1>¡Pago aprobado! 🍾</h1>
