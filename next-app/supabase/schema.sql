@@ -50,6 +50,16 @@ CREATE TABLE IF NOT EXISTS suscriptores (
 ALTER TABLE suscriptores ADD COLUMN IF NOT EXISTS confirmado BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE suscriptores ADD COLUMN IF NOT EXISTS token TEXT;
 
+-- Tabla de comentarios / feedback de clientes (al terminar el pago)
+CREATE TABLE IF NOT EXISTS comentarios (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  rating      INTEGER,                          -- 1 a 5 estrellas (opcional)
+  comentario  TEXT NOT NULL DEFAULT '',
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+-- Lista privada: solo accesible vía la API con la service role key
+ALTER TABLE comentarios ENABLE ROW LEVEL SECURITY;
+
 -- Índices útiles
 CREATE INDEX IF NOT EXISTS idx_productos_marca    ON productos(marca);
 CREATE INDEX IF NOT EXISTS idx_productos_deporte  ON productos(deporte);

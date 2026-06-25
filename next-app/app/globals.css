@@ -2019,41 +2019,63 @@ button {
   gap: 10px;
 }
 
-/* Poppers de los costados (los que "tiran" el confeti) */
-.popper {
-  position: fixed;
-  top: 42%;
-  font-size: 5.5rem;
-  pointer-events: none;
-  z-index: 5;
-  animation: popperShake 1.6s ease-in-out infinite;
+/* Sección de feedback en pago aprobado */
+.feedback-form {
+  max-width: 420px;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
-.popper-left {
-  left: 3%;
-  transform-origin: bottom left;
+.feedback-form h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin: 0;
 }
-.popper-right {
-  right: 3%;
-  transform: scaleX(-1);
-  transform-origin: bottom right;
+.feedback-stars {
+  display: flex;
+  gap: 4px;
 }
-@keyframes popperShake {
-  0%, 100% { transform: rotate(-8deg); }
-  50% { transform: rotate(4deg); }
+.feedback-star {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #d8d8d8;
+  cursor: pointer;
+  transition: color var(--transition), transform var(--transition);
+  padding: 0;
 }
-.popper-right {
-  animation-name: popperShakeRight;
+.feedback-star:hover {
+  transform: scale(1.15);
 }
-@keyframes popperShakeRight {
-  0%, 100% { transform: scaleX(-1) rotate(-8deg); }
-  50% { transform: scaleX(-1) rotate(4deg); }
+.feedback-star.on {
+  color: #f5b50a;
 }
-@media (max-width: 600px) {
-  .popper {
-    font-size: 3rem;
-    top: auto;
-    bottom: 8%;
-  }
+.feedback-textarea {
+  width: 100%;
+  border: 1px solid rgba(29, 31, 30, 0.14);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  resize: vertical;
+  outline: none;
+}
+.feedback-textarea:focus {
+  border-color: rgba(217, 45, 32, 0.45);
+  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.08);
+}
+.feedback-gracias {
+  max-width: 420px;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  color: #1da851;
 }
 .btn-festin {
   width: 48px;

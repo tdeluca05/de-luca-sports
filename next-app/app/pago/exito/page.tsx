@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import confetti from "canvas-confetti";
 import Header from "@/components/Header";
+import FeedbackForm from "@/components/FeedbackForm";
 import { useCart } from "@/components/CartContext";
 
 // Lanza toda la fiesta de confetti
@@ -54,10 +55,6 @@ export default function PagoExitoPage() {
     <>
       <Header />
 
-      {/* Poppers que "disparan" el confeti desde los costados */}
-      <span className="popper popper-left" aria-hidden="true">🎉</span>
-      <span className="popper popper-right" aria-hidden="true">🎉</span>
-
       <div className="pago-resultado">
         <div className="pago-icono pago-ok">✓</div>
         <h1>¡Pago aprobado! 🍾</h1>
@@ -86,6 +83,8 @@ export default function PagoExitoPage() {
             🎉
           </button>
         </div>
+
+        <FeedbackForm />
       </div>
     </>
   );
