@@ -3,12 +3,13 @@ import Footer from "@/components/Footer";
 import CartPanel from "@/components/CartPanel";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import NewsletterForm from "@/components/NewsletterForm";
-import { PRODUCTOS } from "@/lib/productos";
+import { getProductos } from "@/lib/getProductos";
 
-// Productos que se muestran en el carrusel del inicio
-const DESTACADOS = PRODUCTOS.filter((p) => p.activo !== false);
+// Siempre fresco: si tu tío agrega/edita productos, se reflejan al instante
+export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const DESTACADOS = await getProductos();
   return (
     <>
       <Header />

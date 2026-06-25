@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase";
+import { dbToProducto, productoToDb } from "@/lib/mapProducto";
 import { PRODUCTOS } from "@/lib/productos";
 
-// GET /api/productos — lista todos los productos activos
+// GET /api/productos — lista todos los productos activos (formato camelCase)
 export async function GET() {
   try {
     const supabase = createAdminClient();
@@ -12,8 +13,10 @@ export async function GET() {
       .eq("activo", true)
       .order("id");
 
-    if (error) throw error;
-    return NextResponse.json(data);
+    if (error || !data || data.length === 0) {
+      return NextResponse.json(PRODUCTOS);
+    }
+    return NextResponse.json(data.map(dbToProducto));
   } catch {
     // Supabase no configurado: devuelve los datos locales como fallback
     return NextResponse.json(PRODUCTOS);
@@ -28,13 +31,13 @@ export async function POST(request: Request) {
 
     const { data, error } = await supabase
       .from("productos")
-      .insert(body)
+      .insert(productoToDb(body))
       .select()
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-    return NextResponse.json(data, { status: 201 });
-  } catch (err) {
+    return NextResponse.json(dbToProducto(data), { status: 201 });
+  } catch {
     return NextResponse.json({ error: "Error interno" }, { status: 500 });
   }
 }

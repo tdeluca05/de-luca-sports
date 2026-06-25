@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartPanel from "@/components/CartPanel";
 import ProductCard from "@/components/ProductCard";
 import { PRODUCTOS } from "@/lib/productos";
+import type { Producto } from "@/lib/types";
 
 type FilterBrand = "all" | "reebook" | "olympikus" | "topper" | "atomik";
 type FilterDeporte = "all" | "running" | "futbol" | "tenis" | "training" | "accesorios";
@@ -30,6 +31,18 @@ export default function CatalogoPage() {
   const [sort, setSort] = useState<SortOrder>("default");
   const [precioMin, setPrecioMin] = useState(0);
   const [precioMax, setPrecioMax] = useState(PRECIO_LIMITE);
+  const [productos, setProductos] = useState<Producto[]>(PRODUCTOS);
+
+  // Traemos los productos desde la base (los que cargó el admin).
+  // Arranca con los locales y los reemplaza cuando llega la respuesta.
+  useEffect(() => {
+    fetch("/api/productos")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setProductos(data);
+      })
+      .catch(() => {});
+  }, []);
 
   // Los thumbs no se cruzan: el mínimo siempre queda por debajo del máximo
   function cambiarMin(v: number) {
@@ -40,7 +53,7 @@ export default function CatalogoPage() {
   }
 
   const filtered = useMemo(() => {
-    let result = PRODUCTOS.filter((p) => p.activo !== false);
+    let result = productos.filter((p) => p.activo !== false);
 
     if (brand !== "all") result = result.filter((p) => p.marca === brand);
     if (deporte !== "all") result = result.filter((p) => p.deporte === deporte);
@@ -61,7 +74,7 @@ export default function CatalogoPage() {
     if (sort === "name-asc") result = [...result].sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
 
     return result;
-  }, [brand, deporte, search, sort, precioMin, precioMax]);
+  }, [productos, brand, deporte, search, sort, precioMin, precioMax]);
 
   const marcas: { value: FilterBrand; label: string }[] = [
     { value: "all", label: "Todos" },

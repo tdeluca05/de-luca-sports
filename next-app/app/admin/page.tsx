@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { dbToProducto, productoToDb } from "@/lib/mapProducto";
 import type { Producto } from "@/lib/types";
 
 const EMPTY_PRODUCT: Omit<Producto, "id"> = {
@@ -48,7 +49,7 @@ export default function AdminPage() {
       .select("*")
       .order("id")
       .then(({ data }) => {
-        if (data) setProductos(data);
+        if (data) setProductos(data.map(dbToProducto));
         setLoading(false);
       });
   }, [isAuthed]);
@@ -80,14 +81,14 @@ export default function AdminPage() {
     if (editing) {
       const { data } = await supabase
         .from("productos")
-        .update(payload)
+        .update(productoToDb(payload))
         .eq("id", editing.id)
         .select()
         .single();
-      if (data) setProductos((prev) => prev.map((p) => (p.id === editing.id ? data : p)));
+      if (data) setProductos((prev) => prev.map((p) => (p.id === editing.id ? dbToProducto(data) : p)));
     } else {
-      const { data } = await supabase.from("productos").insert(payload).select().single();
-      if (data) setProductos((prev) => [...prev, data]);
+      const { data } = await supabase.from("productos").insert(productoToDb(payload)).select().single();
+      if (data) setProductos((prev) => [...prev, dbToProducto(data)]);
     }
 
     setEditing(null);

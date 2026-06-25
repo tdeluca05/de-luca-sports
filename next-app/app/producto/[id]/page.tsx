@@ -1,26 +1,56 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, useEffect, use } from "react";
 import { notFound, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartPanel from "@/components/CartPanel";
 import { useCart } from "@/components/CartContext";
 import { PRODUCTOS } from "@/lib/productos";
+import type { Producto } from "@/lib/types";
 
 export default function ProductoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const { addItem, openCart } = useCart();
-  const found = PRODUCTOS.find((p) => p.id === Number(id));
 
+  const [productos, setProductos] = useState<Producto[] | null>(null);
   const [mainImage, setMainImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(
-    found?.colores?.[0]?.hex ?? null
-  );
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [feedback, setFeedback] = useState(false);
   const [missingSize, setMissingSize] = useState(false);
+
+  // Traemos los productos de la base (con respaldo local)
+  useEffect(() => {
+    fetch("/api/productos")
+      .then((r) => r.json())
+      .then((data) => setProductos(Array.isArray(data) && data.length ? data : PRODUCTOS))
+      .catch(() => setProductos(PRODUCTOS));
+  }, []);
+
+  const found = productos?.find((p) => p.id === Number(id));
+
+  // Cuando carga el producto, seleccionamos su primer color (si tiene)
+  useEffect(() => {
+    if (found?.colores?.[0]?.hex) setSelectedColor(found.colores[0].hex);
+  }, [found]);
+
+  // Mientras carga, mostramos un mensaje
+  if (productos === null) {
+    return (
+      <>
+        <Header />
+        <div className="detalle-shell">
+          <p style={{ textAlign: "center", padding: "4rem", color: "var(--text-soft)" }}>
+            Cargando...
+          </p>
+        </div>
+        <Footer />
+        <CartPanel />
+      </>
+    );
+  }
 
   if (!found) return notFound();
 
