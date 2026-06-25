@@ -2070,6 +2070,26 @@ button {
   transform: translateY(-2px) scale(1.05);
   box-shadow: var(--shadow-sm);
 }
+.btn-wpp-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1ebe57;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition), background-color var(--transition);
+}
+.btn-wpp-circle svg {
+  width: 26px;
+  height: 26px;
+}
+.btn-wpp-circle:hover {
+  transform: translateY(-2px);
+  background: #1da851;
+}
 .pago-resultado p {
   color: var(--text-soft);
   line-height: 1.6;
