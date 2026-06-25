@@ -44,6 +44,14 @@ body {
     linear-gradient(180deg, #f7f7f7 0%, #ededed 100%);
 }
 
+/* En escritorio mostramos todo un poco más compacto (como bajar el zoom).
+   Ajustá el valor: 1 = normal, 0.8 = más chico, 0.67 = como el zoom 67%. */
+@media (min-width: 900px) {
+  body {
+    zoom: 0.8;
+  }
+}
+
 body.menu-open,
 body.cart-open {
   overflow: hidden;
