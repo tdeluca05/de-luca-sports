@@ -2277,3 +2277,56 @@ button {
     flex-shrink: 0;
   }
 }
+
+/* ── Ajustes para celular: achicar tipografías y espaciados ── */
+@media (max-width: 600px) {
+  /* Títulos grandes */
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 11vw, 3rem);
+  }
+  .section-heading h2,
+  .contact-copy h2 {
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+  }
+  .newsletter-shell h2 {
+    font-size: clamp(1.6rem, 6.5vw, 2rem);
+  }
+  .checkout-title,
+  .detalle-nombre,
+  .pago-resultado h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Textos */
+  .hero-copy p,
+  .section-heading p,
+  .contact-copy p {
+    font-size: 0.95rem;
+  }
+  .product-name {
+    font-size: 1.25rem;
+  }
+  .product-price {
+    font-size: 1.5rem;
+  }
+
+  /* Espaciados más compactos */
+  .products-section,
+  .contact-section {
+    padding: 44px 0;
+  }
+  .newsletter-section {
+    padding: 28px 0 52px;
+  }
+  .newsletter-shell {
+    padding: 38px 20px;
+  }
+  .checkout-card,
+  .checkout-summary {
+    padding: 1.3rem;
+  }
+  .detalle-shell,
+  .checkout-page {
+    padding: 1.2rem 1rem 2.5rem;
+  }
+}
